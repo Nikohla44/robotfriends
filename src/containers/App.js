@@ -25,12 +25,13 @@ class App extends Component {
   }
 
   render() {
-    const {robots, searchfield} = this.state;
-    const filteredRobots = robots.filter(robot => {
-      return robot.name.toLowerCase().includes(searchfield.toLowerCase());
+    const filteredRobots = this.state.robots.filter(robot => {
+      return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
     })
-      return !robots.length ?
-        <h1>Loading</h1> :
+    if (this.state.robots.length === 0) {
+      return <h1>Loading</h1>
+    } else {
+        return (
           <div className='tc'>
             <h1 className='f1'>RoboFriends</h1>
             <SearchBox searchChange={this.onSearchChange}/>
@@ -41,5 +42,6 @@ class App extends Component {
         )
     }
   }
+}
 
 export default App;
